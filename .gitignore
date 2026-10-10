@@ -38,3 +38,8 @@ crashlytics-build.properties
 fabric.properties
 .idea/httpRequests
 .idea/caches/build_file_checksums.ser
+
+###> symfony/reprise ###
+/node_modules/
+/public/build/
+###< symfony/reprise ###

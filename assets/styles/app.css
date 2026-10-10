@@ -1,0 +1,163 @@
+@import "tailwindcss";
+@import "@fontsource-variable/bricolage-grotesque";
+@import "@fontsource-variable/jetbrains-mono";
+@import "@fontsource-variable/inter";
+/*
+ * Qarn : design tokens (Tailwind CSS v4)
+ * À importer après `@import "tailwindcss";`
+ * Les valeurs hexadécimales sont données en commentaire (fallback / Figma).
+ */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* ---------- Typographie ---------- */
+    --font-display: "Bricolage Grotesque Variable", "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+    /* On remplace entièrement la palette par défaut de Tailwind */
+    --color-*: initial;
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-transparent: transparent;
+    --color-current: currentColor;
+
+    /* ---------- Granit : neutres (pierre, surfaces, texte) ---------- */
+    --color-granit-50: oklch(0.975 0.006 255); /* #f4f7fb */
+    --color-granit-100: oklch(0.945 0.009 258); /* #e9edf3 */
+    --color-granit-200: oklch(0.890 0.012 260); /* #d6dbe3 */
+    --color-granit-300: oklch(0.810 0.014 262); /* #bcc1ca */
+    --color-granit-400: oklch(0.711 0.016 261); /* #9ca2ac */
+    --color-granit-500: oklch(0.620 0.018 266); /* #818691 */
+    --color-granit-600: oklch(0.530 0.019 263); /* #666c77 */
+    --color-granit-700: oklch(0.451 0.018 261); /* #505660 */
+    --color-granit-800: oklch(0.370 0.015 260); /* #3b4048 */
+    --color-granit-900: oklch(0.289 0.013 267); /* #282b32 */
+    --color-granit-950: oklch(0.209 0.013 264); /* #15181e */
+
+    /* ---------- Azimut : couleur primaire (direction, actions principales) ---------- */
+    --color-azimut-50: oklch(0.974 0.011 257); /* #f2f7fe */
+    --color-azimut-100: oklch(0.945 0.025 256); /* #e2eefe */
+    --color-azimut-200: oklch(0.889 0.055 255); /* #c3ddff */
+    --color-azimut-300: oklch(0.810 0.097 255); /* #96c4ff */
+    --color-azimut-400: oklch(0.711 0.140 255); /* #62a4f7 */
+    --color-azimut-500: oklch(0.619 0.165 255); /* #3586e6 */
+    --color-azimut-600: oklch(0.530 0.165 255); /* #126ac8 */
+    --color-azimut-700: oklch(0.449 0.147 255); /* #0253a4 */
+    --color-azimut-800: oklch(0.370 0.122 255); /* #003e7e */
+    --color-azimut-900: oklch(0.290 0.096 255); /* #002a59 */
+    --color-azimut-950: oklch(0.209 0.070 256); /* #001737 */
+
+    /* ---------- Crépuscule : accent (point d'intérêt, mentions, sélection) ---------- */
+    --color-crepuscule-50: oklch(0.975 0.014 300); /* #f8f5ff */
+    --color-crepuscule-100: oklch(0.945 0.032 303); /* #f1e8ff */
+    --color-crepuscule-200: oklch(0.890 0.065 303); /* #e3d1ff */
+    --color-crepuscule-300: oklch(0.809 0.111 303); /* #cfaffc */
+    --color-crepuscule-400: oklch(0.709 0.145 303); /* #b489eb */
+    --color-crepuscule-500: oklch(0.620 0.171 303); /* #9c67d9 */
+    --color-crepuscule-600: oklch(0.531 0.170 303); /* #814cbb */
+    --color-crepuscule-700: oklch(0.450 0.152 303); /* #673999 */
+    --color-crepuscule-800: oklch(0.371 0.127 303); /* #4e2976 */
+    --color-crepuscule-900: oklch(0.290 0.102 303); /* #361a54 */
+    --color-crepuscule-950: oklch(0.211 0.077 303); /* #200c35 */
+
+    /* ---------- Brasier : danger (suppression, erreur) ---------- */
+    --color-brasier-50: oklch(0.975 0.011 24); /* #fef4f3 */
+    --color-brasier-100: oklch(0.946 0.026 27); /* #fee7e4 */
+    --color-brasier-200: oklch(0.890 0.056 25); /* #fecdc8 */
+    --color-brasier-300: oklch(0.810 0.106 25); /* #fea69e */
+    --color-brasier-400: oklch(0.710 0.162 25); /* #f6736c */
+    --color-brasier-500: oklch(0.621 0.190 25); /* #e24947 */
+    --color-brasier-600: oklch(0.531 0.190 25); /* #c2272d */
+    --color-brasier-700: oklch(0.451 0.172 25); /* #9f131d */
+    --color-brasier-800: oklch(0.370 0.143 25); /* #7a0913 */
+    --color-brasier-900: oklch(0.290 0.114 25); /* #570309 */
+    --color-brasier-950: oklch(0.210 0.085 25); /* #360003 */
+
+    /* ---------- Ambre : avertissement, alerte ---------- */
+    --color-ambre-50: oklch(0.980 0.015 71); /* #fff7ee */
+    --color-ambre-100: oklch(0.959 0.029 72); /* #feefdd */
+    --color-ambre-200: oklch(0.926 0.058 72); /* #ffe1bd */
+    --color-ambre-300: oklch(0.881 0.095 72); /* #ffce91 */
+    --color-ambre-400: oklch(0.830 0.135 72); /* #fdb85b */
+    --color-ambre-500: oklch(0.781 0.150 72); /* #f2a635 */
+    --color-ambre-600: oklch(0.679 0.142 72); /* #cd8711 */
+    --color-ambre-700: oklch(0.569 0.122 72); /* #a36900 */
+    --color-ambre-800: oklch(0.481 0.101 73); /* #805304 */
+    --color-ambre-900: oklch(0.389 0.083 71); /* #603c01 */
+    --color-ambre-950: oklch(0.290 0.060 73); /* #3d2602 */
+
+    /* ---------- Lichen : succès, validation ---------- */
+    --color-lichen-50: oklch(0.975 0.020 150); /* #eefbf0 */
+    --color-lichen-100: oklch(0.946 0.044 150); /* #d9f6de */
+    --color-lichen-200: oklch(0.890 0.078 150); /* #b7eac0 */
+    --color-lichen-300: oklch(0.809 0.110 150); /* #8bd59b */
+    --color-lichen-400: oklch(0.709 0.145 150); /* #54ba6f */
+    --color-lichen-500: oklch(0.620 0.170 150); /* #03a14a */
+    --color-lichen-600: oklch(0.530 0.146 150); /* #00823a */
+    --color-lichen-700: oklch(0.449 0.123 150); /* #02672d */
+    --color-lichen-800: oklch(0.371 0.102 150); /* #004e20 */
+    --color-lichen-900: oklch(0.291 0.080 150); /* #003614 */
+    --color-lichen-950: oklch(0.209 0.057 150); /* #001f09 */
+
+}
+
+/* ---------- Couleurs sémantiques (thème clair / sombre) ---------- */
+:root {
+    --q-bg: var(--color-granit-50);
+    --q-surface: var(--color-white);
+    --q-surface-sunken: var(--color-granit-100);
+    --q-border: var(--color-granit-200);
+    --q-text: var(--color-granit-950);
+    --q-text-muted: var(--color-granit-600);
+    --q-primary: var(--color-azimut-600);
+    --q-primary-hover: var(--color-azimut-700);
+    --q-on-primary: var(--color-white);
+    --q-accent: var(--color-crepuscule-600);
+    --q-focus: var(--color-azimut-500);
+    --q-danger: var(--color-brasier-600);
+    --q-warning: var(--color-ambre-500);
+    --q-success: var(--color-lichen-600);
+}
+
+.dark {
+    --q-bg: var(--color-granit-950);
+    --q-surface: var(--color-granit-900);
+    --q-surface-sunken: oklch(0.17 0.012 264);
+    --q-border: var(--color-granit-800);
+    --q-text: var(--color-granit-50);
+    --q-text-muted: var(--color-granit-400);
+    --q-primary: var(--color-azimut-400);
+    --q-primary-hover: var(--color-azimut-300);
+    --q-on-primary: var(--color-azimut-950);
+    --q-accent: var(--color-crepuscule-400);
+    --q-focus: var(--color-azimut-400);
+    --q-danger: var(--color-brasier-400);
+    --q-warning: var(--color-ambre-400);
+    --q-success: var(--color-lichen-400);
+}
+
+/* Expose les tokens sémantiques comme utilitaires : bg-bg, bg-surface, text-muted, bg-primary... */
+@theme inline {
+    --color-bg: var(--q-bg);
+    --color-surface: var(--q-surface);
+    --color-sunken: var(--q-surface-sunken);
+    --color-line: var(--q-border);
+    --color-ink: var(--q-text);
+    --color-muted: var(--q-text-muted);
+    --color-primary: var(--q-primary);
+    --color-primary-hover: var(--q-primary-hover);
+    --color-on-primary: var(--q-on-primary);
+    --color-accent: var(--q-accent);
+    --color-focus: var(--q-focus);
+    --color-danger: var(--q-danger);
+    --color-warning: var(--q-warning);
+    --color-success: var(--q-success);
+}
+
+@layer base {
+    body { background-color: var(--q-bg); color: var(--q-text); font-family: var(--font-sans); }
+    h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.01em; }
+    :focus-visible { outline: 2px solid var(--q-focus); outline-offset: 2px; }
+}
