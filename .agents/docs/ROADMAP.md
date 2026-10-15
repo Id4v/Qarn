@@ -8,7 +8,7 @@ L'idée directrice : **chaque phase produit quelque chose d'utilisable**, et tu 
 
 - **Symfony** : la dernière version stable (8.x) ou la 7.4 LTS si tu veux une base de compatibilité large pour les bundles. Vérifie la compatibilité de API Platform avant de choisir.
 - **Base de données** : PostgreSQL (JSONB pour le journal d'activité, full-text search plus tard).
-- **Environnement** : Docker Compose avec FrankenPHP (le Mercure hub y est intégré, donc pas de service en plus).
+- **Environnement** : démarrer l'application en local avec Symfony CLI (`symfony serve -d`) pour avancer rapidement, et utiliser Docker Compose pour les services nécessaires, notamment PostgreSQL. Reporter l'ajout de FrankenPHP à la phase 5, avec Mercure.
 - **Frontend** : deux étapes volontaires. D'abord Symfony UX (Turbo + Stimulus), puis un front SPA (Vue ou React) sur la même API. Tu compares ainsi deux approches sur le même domaine métier.
 - **Monorepo** : `/backend` et `/frontend` dans le même dépôt Git, ce qui simplifie la CI.
 
@@ -35,8 +35,8 @@ C'est un excellent sujet de réflexion, et il sera aussi pertinent côté fronte
 
 **Objectif :** un projet vide mais industrialisé.
 
-- Docker Compose (FrankenPHP, PostgreSQL, Mailpit pour les emails de dev)
-- Symfony en mode webapp, AssetMapper pour le moment
+- Docker Compose (PostgreSQL, Mailpit pour les emails de dev ; FrankenPHP sera ajouté en phase 5)
+- Symfony en mode webapp, Symfony Reprise pour le moment
 - Qualité : PHPStan (niveau max progressif), PHP-CS-Fixer ou ECS, Rector
 - Tests : PHPUnit (ou Pest), `zenstruck/foundry` pour les factories
 - CI GitHub Actions : lint + analyse statique + tests
@@ -118,6 +118,8 @@ C'est un excellent sujet de réflexion, et il sera aussi pertinent côté fronte
 ## Phase 5 : Temps réel avec Mercure (2 semaines)
 
 **Objectif :** plusieurs utilisateurs voient les changements des autres en direct.
+
+- Introduire FrankenPHP dans Docker Compose à cette phase pour servir l'application et activer son hub Mercure intégré, sans ajouter un conteneur Mercure séparé. Garder Symfony CLI comme serveur de développement jusque-là.
 
 - Publication d'événements depuis le backend (Doctrine listener ou, mieux, événements de domaine) vers un topic par board
 - **Autorisation des topics** via JWT Mercure (abonnement uniquement aux boards accessibles)
