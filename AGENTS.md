@@ -63,8 +63,19 @@ Three specifics worth spelling out, because they are easy to get wrong:
 
 ## Everyday workflow
 
-- Run the app with `symfony serve -d`, and commands with `symfony console ...`
-  (or `bin/console` when the Symfony CLI isn't available).
+- Check `symfony server:list` before starting the app. The project's existing
+  Symfony CLI server is available at `http://127.0.0.1:8000`; reuse it for
+  Playwright/browser checks. Start a server only when `server:list` shows none,
+  and stop only a server started for the current task.
+- The execution sandbox can block Docker's Unix socket, loopback network access,
+  DNS, and package downloads. If Docker, PostgreSQL, Bun, or Symfony CLI reports
+  a permission, DNS, or connection error, rerun the specific check or operation
+  with elevated access before concluding the service is unavailable.
+- Verify the configured PostgreSQL connection with elevated access when the
+  sandbox blocks Docker or loopback. Keep using the project's configured
+  database; do not switch to SQLite solely to work around a sandbox restriction.
+- When no app server is running, use `symfony serve -d`. Run commands with
+  `symfony console ...` (or `bin/console` when the Symfony CLI isn't available).
 - When something fails, read `var/log/dev.log` and the web profiler
   (`/_profiler`) before changing code.
 - If `maker-bundle` is installed, prefer `bin/console make:*` with every argument
