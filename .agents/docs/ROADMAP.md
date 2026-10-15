@@ -51,10 +51,14 @@ C'est un excellent sujet de réflexion, et il sera aussi pertinent côté fronte
 
 **Objectif :** un back solide avant tout JS.
 
+**Cadrage validé :** consulter [CADRAGE-PHASE-1.md](CADRAGE-PHASE-1.md) avant de planifier ou d'exécuter cette phase. Il fixe les règles métier pour les comptes, les équipes, les invitations et les rôles par équipe.
+
 - Entités Doctrine avec attributs, enums PHP pour les rôles, migrations
 - Inscription / connexion (form login), vérification email, reset password (`symfonycasts/verify-email-bundle`, `reset-password-bundle`)
 - Équipes et invitations par email (token signé, expiration)
-- **Voters** pour toutes les autorisations (`BOARD_VIEW`, `BOARD_EDIT`, `CARD_MOVE`...)
+- Construire et tester les autorisations liées aux comptes et aux équipes, avec les rôles propriétaire/membre propres à chaque équipe
+- **Voters** pour toutes les autorisations (`BOARD_VIEW`, `BOARD_EDIT`, `CARD_MOVE`...) même si pas d'écran associé encore présent. Le but est d'implémenter le système quite à l'adapter par la suite.
+- Appliquer les contrôles d'accès aux écrans et opérations des tableaux et cartes en phase 2, lorsque ces modèles seront créés
 - Réflexion DDD légère : services applicatifs / handlers plutôt que logique dans les contrôleurs
 - Tests fonctionnels des règles d'accès (c'est le plus important à tester ici)
 
