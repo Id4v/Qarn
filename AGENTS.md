@@ -116,3 +116,10 @@ AI Mate: project diagnostic tools, exposed through the `symfony php vendor/bin/m
 - Discover the tool surface with `symfony php vendor/bin/mate tools:list`, inspect parameters with `tools:inspect <tool>`, and run a tool with `tools:call <tool> --<param>=<value>` (add `--format=json` for machine-readable output).
 - Installed extensions: symfony/ai-mate, symfony/ai-monolog-mate-extension, symfony/ai-symfony-mate-extension.
 <!-- END AI_MATE_INSTRUCTIONS -->
+
+More info in .agents/docs/ROADMAP.md
+
+Some design prototypes in .agents/docs/maquette/
+Frontend is based on TailwindCSS V4, Icons will be LucideIcons. 
+Use Symfony UX packages when you can (ex : symfony/ux-icons for icons, symfony/simulus-bundle if needed, etc)
+Frontend build is done with symfony rerpise with ViteJS and bunJS as package manager.
