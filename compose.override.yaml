@@ -1,0 +1,12 @@
+services:
+###> doctrine/doctrine-bundle ###
+  database:
+    environment:
+      POSTGRES_DB: "qarn"
+      POSTGRES_USER: "qarn_user"
+      POSTGRES_PASSWORD: "169a8z4az69/7e4*/968azdza"
+    ports:
+      - "127.0.0.1:5432:5432"
+    labels:
+      com.symfony.server.service-ignore: "true"
+###< doctrine/doctrine-bundle ###
