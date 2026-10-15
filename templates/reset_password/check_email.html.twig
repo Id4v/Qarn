@@ -1,0 +1,12 @@
+{% extends 'auth/layout.html.twig' %}
+
+{% block title %}Consultez votre messagerie · Qarn{% endblock %}
+
+{% block auth_content %}
+    <h2 id="auth-title">Consultez votre messagerie</h2>
+    <p class="auth-intro">
+        Si un compte correspond à cette adresse, un lien de réinitialisation vient d’être envoyé.
+        Il expirera {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+    </p>
+    <p class="auth-signup">Vous n’avez rien reçu ? Vérifiez vos courriers indésirables ou <a href="{{ path('app_forgot_password_request') }}">demandez un nouveau lien</a>.</p>
+{% endblock %}

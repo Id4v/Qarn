@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Qarn{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
             {{ reprise_entry_link_tags('app') }}
@@ -19,7 +19,26 @@
         <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
         {% endif %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="{% block body_class %}{% endblock %}">
+        {% block site_header %}
+        <header class="site-header">
+            <nav aria-label="Navigation principale">
+                <a href="{{ path('app_health') }}">Qarn</a>
+                {% if app.user %}
+                    <a href="{{ path('app_teams') }}">Mes équipes</a>
+                    <span>{{ app.user.displayName }}</span>
+                    <a href="{{ path('app_logout') }}">Déconnexion</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}">Connexion</a>
+                    <a href="{{ path('app_register') }}">Créer un compte</a>
+                {% endif %}
+            </nav>
+        </header>
+        {% endblock %}
+        <main class="{% block main_class %}site-main{% endblock %}">
+            {% for message in app.flashes('success') %}<p role="status">{{ message }}</p>{% endfor %}
+            {% for message in app.flashes('error') %}<p role="alert">{{ message }}</p>{% endfor %}
+            {% block body %}{% endblock %}
+        </main>
     </body>
 </html>

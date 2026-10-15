@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ team.name }} · Qarn{% endblock %}
+
+{% block body %}
+    <p><a href="{{ path('app_teams') }}">← Mes équipes</a></p>
+    <h1>{{ team.name }}</h1>
+    <h2>Membres</h2>
+    <ul>
+        {% for membership in team.memberships %}
+            <li>
+                {{ membership.user.displayName }} ({{ membership.role.value == 'owner' ? 'Propriétaire' : 'Membre' }})
+                {% if is_granted('TEAM_MANAGE', team) and membership.user.id != currentUser.id %}
+                    {% if membership.role.value == 'member' %}
+                        <form method="post" action="{{ path('app_team_member_promote', {id: team.id, membershipId: membership.id}) }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token('promote-member-' ~ membership.id) }}">
+                            <button type="submit">Promouvoir propriétaire</button>
+                        </form>
+                    {% else %}
+                        <form method="post" action="{{ path('app_team_member_demote', {id: team.id, membershipId: membership.id}) }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token('demote-member-' ~ membership.id) }}">
+                            <button type="submit">Rétrograder membre</button>
+                        </form>
+                    {% endif %}
+                    <form method="post" action="{{ path('app_team_member_remove', {id: team.id, membershipId: membership.id}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('remove-member-' ~ membership.id) }}">
+                        <button type="submit">Retirer</button>
+                    </form>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if is_granted('TEAM_MANAGE', team) %}
+        <h2>Inviter une personne</h2>
+        {{ form_start(invitationForm, {action: path('app_team_invite', {id: team.id})}) }}
+            {{ form_widget(invitationForm) }}
+        {{ form_end(invitationForm) }}
+        <h2>Invitations en attente</h2>
+        <ul>
+            {% for invitation in team.invitations %}
+                {% if invitation.isPending() %}
+                    <li>{{ invitation.email }} (expire le {{ invitation.expiresAt|date('d/m/Y') }})
+                        <form method="post" action="{{ path('app_team_invitation_revoke', {id: team.id, invitationId: invitation.id}) }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token('revoke-invitation-' ~ invitation.id) }}">
+                            <button type="submit">Révoquer</button>
+                        </form>
+                    </li>
+                {% endif %}
+            {% else %}<li>Aucune invitation.</li>{% endfor %}
+        </ul>
+    {% endif %}
+
+    <h2>Quitter l’équipe</h2>
+    <form method="post" action="{{ path('app_team_leave', {id: team.id}) }}">
+        <input type="hidden" name="_token" value="{{ csrf_token('leave-team-' ~ team.id) }}">
+        <button type="submit">Quitter</button>
+    </form>
+
+    {% if is_granted('TEAM_DELETE', team) %}
+        <h2>Supprimer définitivement</h2>
+        <p>Cette action supprime l’équipe et toutes les données qui lui sont rattachées.</p>
+        <form method="post" action="{{ path('app_team_delete', {id: team.id}) }}">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete-team-' ~ team.id) }}">
+            <label for="confirmation">Saisissez « {{ team.name }} » pour confirmer</label>
+            <input id="confirmation" name="confirmation" required>
+            <button type="submit">Supprimer définitivement l’équipe</button>
+        </form>
+    {% endif %}
+{% endblock %}

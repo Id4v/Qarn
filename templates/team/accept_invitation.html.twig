@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rejoindre {{ invitation.team.name }} · Qarn{% endblock %}
+
+{% block body %}
+    <h1>Rejoindre {{ invitation.team.name }}</h1>
+    <p>Vous êtes invité·e avec l’adresse {{ invitation.email }}. Vous rejoindrez l’équipe avec le rôle membre.</p>
+    {{ form(acceptForm) }}
+{% endblock %}

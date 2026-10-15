@@ -1,0 +1,9 @@
+{% extends 'auth/layout.html.twig' %}
+
+{% block title %}Vérifiez votre adresse · Qarn{% endblock %}
+
+{% block auth_content %}
+    <h2 id="auth-title">Vérifiez votre adresse e-mail</h2>
+    <p class="auth-intro">Nous vous avons envoyé un lien de confirmation. Ouvrez-le pour valider votre inscription, puis connectez-vous.</p>
+    <p class="auth-signup"><a href="{{ path('app_login') }}">Retour à la connexion</a></p>
+{% endblock %}

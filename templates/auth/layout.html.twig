@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body_class %}auth-page{% endblock %}
+{% block main_class %}auth-main{% endblock %}
+{% block site_header %}{% endblock %}
+
+{% block body %}
+    <div class="auth-layout">
+        {% include 'auth/_brand.html.twig' %}
+        <section class="auth-form-panel" aria-labelledby="auth-title">
+            <div class="auth-form-card">
+                {% block auth_content %}{% endblock %}
+            </div>
+        </section>
+    </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'auth/layout.html.twig' %}
+
+{% block title %}Connexion · Qarn{% endblock %}
+
+{% block auth_content %}
+    <h2 id="auth-title">Content de vous revoir</h2>
+    <p class="auth-intro">Connectez-vous pour retrouver vos tableaux.</p>
+
+    {% if error %}
+        <p class="auth-error" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+    {% endif %}
+
+    {% if app.user %}
+        <p class="auth-error" role="status">
+            Vous êtes connecté en tant que {{ app.user.userIdentifier }}.
+            <a href="{{ logout_path() }}">Se déconnecter</a>
+        </p>
+    {% endif %}
+
+    <form method="post" class="auth-form">
+        <div class="auth-field">
+            <label for="username">Adresse e-mail</label>
+            <input class="auth-input" type="email" value="{{ last_username }}" name="_username" id="username" autocomplete="email" required autofocus>
+        </div>
+        <div class="auth-field">
+            <div class="auth-label-row">
+                <label for="password">Mot de passe</label>
+                <a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
+            </div>
+            <div class="auth-password-wrap">
+                <input class="auth-input" type="password" name="_password" id="password" autocomplete="current-password" required>
+                <button class="auth-password-toggle" type="button" data-password-toggle aria-label="Afficher le mot de passe">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.2 12s3.5-6 9.8-6 9.8 6 9.8 6-3.5 6-9.8 6-9.8-6-9.8-6Z"/><circle cx="12" cy="12" r="2.7"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+        <button class="auth-submit" type="submit">Se connecter <span aria-hidden="true">→</span></button>
+    </form>
+
+    <p class="auth-signup">Nouveau sur Qarn ? <a href="{{ path('app_register') }}">Créer un compte</a></p>
+{% endblock %}

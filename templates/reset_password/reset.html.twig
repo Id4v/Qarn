@@ -1,0 +1,13 @@
+{% extends 'auth/layout.html.twig' %}
+
+{% block title %}Choisir un nouveau mot de passe · Qarn{% endblock %}
+
+{% block auth_content %}
+    <h2 id="auth-title">Choisir un nouveau mot de passe</h2>
+    <p class="auth-intro">Choisissez un nouveau mot de passe pour accéder à nouveau à votre espace Qarn.</p>
+
+    {{ form_start(resetForm, {attr: {class: 'auth-form'}}) }}
+        {{ form_row(resetForm.plainPassword) }}
+        <button class="auth-submit">Enregistrer le nouveau mot de passe <span aria-hidden="true">→</span></button>
+    {{ form_end(resetForm) }}
+{% endblock %}

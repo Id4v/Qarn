@@ -1,0 +1,12 @@
+{% extends 'auth/layout.html.twig' %}
+
+{% block title %}Créer un compte · Qarn{% endblock %}
+
+{% block auth_content %}
+    <h2 id="auth-title">Créer un compte</h2>
+    <p class="auth-intro">Vous devrez vérifier votre adresse e-mail avant de pouvoir utiliser Qarn.</p>
+    {{ form_start(registrationForm, {attr: {class: 'auth-form'}}) }}
+        {{ form_widget(registrationForm) }}
+    {{ form_end(registrationForm) }}
+    <p class="auth-signup">Vous avez déjà un compte ? <a href="{{ path('app_login') }}">Connectez-vous</a></p>
+{% endblock %}

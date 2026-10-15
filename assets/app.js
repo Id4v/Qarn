@@ -6,4 +6,16 @@
  */
 import './styles/app.css';
 
-console.log('This log comes from assets/app.js - welcome to Symfony Reprise! 🎉');
+document.querySelectorAll('[data-password-toggle]').forEach((toggle) => {
+    toggle.addEventListener('click', () => {
+        const input = toggle.parentElement?.querySelector('input');
+
+        if (!(input instanceof HTMLInputElement)) {
+            return;
+        }
+
+        const shouldReveal = input.type === 'password';
+        input.type = shouldReveal ? 'text' : 'password';
+        toggle.setAttribute('aria-label', shouldReveal ? 'Masquer le mot de passe' : 'Afficher le mot de passe');
+    });
+});

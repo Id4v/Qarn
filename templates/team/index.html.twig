@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes équipes · Qarn{% endblock %}
+
+{% block body %}
+    <h1>Mes équipes</h1>
+    {% if teams is empty %}<p>Vous ne faites encore partie d’aucune équipe.</p>{% endif %}
+    <ul>
+        {% for team in teams %}
+            <li><a href="{{ path('app_team_show', {id: team.id}) }}">{{ team.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <h2>Créer une équipe</h2>
+    {{ form(teamForm) }}
+{% endblock %}

@@ -64,9 +64,11 @@ Three specifics worth spelling out, because they are easy to get wrong:
 ## Everyday workflow
 
 - Check `symfony server:list` before starting the app. The project's existing
-  Symfony CLI server is available at `http://127.0.0.1:8000`; reuse it for
+  Symfony CLI server is usually available at `http://127.0.0.1:8000`; reuse it for
   Playwright/browser checks. Start a server only when `server:list` shows none,
   and stop only a server started for the current task.
+- Run the app with `symfony serve -d`, and commands with `symfony console ...`
+  (or `bin/console` when the Symfony CLI isn't available).
 - The execution sandbox can block Docker's Unix socket, loopback network access,
   DNS, and package downloads. If Docker, PostgreSQL, Bun, or Symfony CLI reports
   a permission, DNS, or connection error, rerun the specific check or operation
@@ -134,3 +136,6 @@ Some design prototypes in .agents/docs/maquette/
 Frontend is based on TailwindCSS V4, Icons will be LucideIcons. 
 Use Symfony UX packages when you can (ex : symfony/ux-icons for icons, symfony/simulus-bundle if needed, etc)
 Frontend build is done with symfony rerpise with ViteJS and bunJS as package manager.
+
+
+A chaque modification qui touche au frontend (CSS, JS, TWIG) tu vérifieras le rendu frontend soit par le biais des outils adequat afin de s'assurer que le rendu est conforme visuellement aux maquettes (playwright, mcp chrome, computer use avec un navigateur et des screenshots).

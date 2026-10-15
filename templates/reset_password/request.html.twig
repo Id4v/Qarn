@@ -1,0 +1,18 @@
+{% extends 'auth/layout.html.twig' %}
+
+{% block title %}Réinitialiser le mot de passe · Qarn{% endblock %}
+
+{% block auth_content %}
+    {% for flash_error in app.flashes('reset_password_error') %}
+        <div class="auth-error" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    <h2 id="auth-title">Réinitialiser le mot de passe</h2>
+    <p class="auth-intro">Indiquez votre adresse e-mail pour recevoir un lien de réinitialisation.</p>
+
+    {{ form_start(requestForm, {attr: {class: 'auth-form'}}) }}
+        {{ form_row(requestForm.email) }}
+
+        <button class="auth-submit">Envoyer le lien <span aria-hidden="true">→</span></button>
+    {{ form_end(requestForm) }}
+    <p class="auth-signup"><a href="{{ path('app_login') }}">Retour à la connexion</a></p>
+{% endblock %}
