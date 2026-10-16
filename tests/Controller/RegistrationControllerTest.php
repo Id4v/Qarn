@@ -92,7 +92,7 @@ final class RegistrationControllerTest extends DatabaseWebTestCase
         self::assertResponseRedirects('/login');
         $crawler = $client->followRedirect();
         self::assertSelectorExists('a[href="/register"]');
-        $crawler = $client->click($crawler->selectLink('Inscrivez-vous')->link());
+        $crawler = $client->click($crawler->selectLink('Créer un compte')->link());
         $client->submit($crawler->selectButton('Créer mon compte')->form([
             'registration_form[email]' => 'new.invitee@example.test',
             'registration_form[displayName]' => 'New Invitee',

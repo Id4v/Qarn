@@ -65,7 +65,7 @@ final class PasswordResetTest extends DatabaseWebTestCase
 
         $client->followRedirect();
         self::assertResponseIsSuccessful();
-        self::assertSelectorTextContains('body', 'If an account matching your email exists');
+        self::assertSelectorTextContains('body', 'Si un compte correspond à cette adresse, un lien de réinitialisation vient d’être envoyé.');
         self::assertEmailCount(0);
     }
 }
